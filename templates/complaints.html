@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Complaints</title>
+    <title>Complaints</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-    <h1>Submitted Complaints</h1>
+    <nav class="navbar">
+        <h2>CampusPulse</h2>
 
-    {% for complaint in complaints %}
+        <a href="/">Home</a>
+    </nav>
 
-        <div>
+    <div class="container">
+
+        <h1>Submitted Complaints</h1>
+
+        {% for complaint in complaints %}
+
+        <div class="card">
 
             <h2>{{ complaint[1] }}</h2>
 
             <p>{{ complaint[2] }}</p>
 
-            <hr>
-
         </div>
 
-    {% endfor %}
+        {% endfor %}
+
+    </div>
 
 </body>
 </html>

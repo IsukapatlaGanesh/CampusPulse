@@ -1,19 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusPulse</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
 <body>
 
-    <h1>CampusPulse</h1>
+    <nav class="navbar">
+        <h2>CampusPulse</h2>
 
-    <form action="/submit" method="POST">
+        <a href="/complaints">View Complaints</a>
+    </nav>
 
-        <input type="text" name="title" placeholder="Issue Title" required>
+    <div class="container">
 
-        <br><br>
+        <h1>Campus Issue Reporting System</h1>
 
-        <textarea name="description" placeholder="Describe the issue" required></textarea>
+        <p>
+            Report campus issues easily and track complaints.
+        </p>
 
-        <br><br>
+        <form action="/submit" method="POST">
 
-        <button type="submit">Submit Issue</button>
+            <input type="text" name="title" placeholder="Issue Title" required>
 
-    </form>
+            <textarea name="description" placeholder="Describe the issue" required></textarea>
+
+            <button type="submit">Submit Issue</button>
+
+        </form>
+
+    </div>
 
 </body>
+</html>

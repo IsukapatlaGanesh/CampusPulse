@@ -23,11 +23,23 @@
 
         <div class="card">
 
-            <h2>{{ complaint[1] }}</h2>
+    <div class="top-row">
 
-            <p>{{ complaint[2] }}</p>
+        <span class="category">
+            {{ complaint[3] }}
+        </span>
 
-        </div>
+        <span class="status">
+            {{ complaint[4] }}
+        </span>
+
+    </div>
+
+    <h2>{{ complaint[1] }}</h2>
+
+    <p>{{ complaint[2] }}</p>
+
+</div>
 
         {% endfor %}
 

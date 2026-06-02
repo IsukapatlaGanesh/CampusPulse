@@ -2,35 +2,37 @@ from flask import Flask, render_template, request
 import sqlite3
 
 app = Flask(__name__)
+
+
 def init_db():
-
     conn = sqlite3.connect('database.db')
-
     cursor = conn.cursor()
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS complaints (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
-            description TEXT NOT NULL
+            description TEXT NOT NULL,
+            category TEXT NOT NULL,
+            status TEXT NOT NULL
         )
     ''')
 
     conn.commit()
     conn.close()
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
+
+
 @app.route('/complaints')
 def complaints():
-
     conn = sqlite3.connect('database.db')
-
     cursor = conn.cursor()
 
     cursor.execute('SELECT * FROM complaints')
-
     all_complaints = cursor.fetchall()
 
     conn.close()
@@ -43,17 +45,22 @@ def complaints():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-
     title = request.form['title']
     description = request.form['description']
+    category = request.form['category']
+
+    status = "Pending"
 
     conn = sqlite3.connect('database.db')
-
     cursor = conn.cursor()
 
     cursor.execute(
-        'INSERT INTO complaints (title, description) VALUES (?, ?)',
-        (title, description)
+        '''
+        INSERT INTO complaints
+        (title, description, category, status)
+        VALUES (?, ?, ?, ?)
+        ''',
+        (title, description, category, status)
     )
 
     conn.commit()
@@ -69,4 +76,3 @@ def submit():
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
-

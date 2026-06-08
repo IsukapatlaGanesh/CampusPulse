@@ -29,17 +29,34 @@ def home():
 
 @app.route('/complaints')
 def complaints():
+
     conn = sqlite3.connect('database.db')
+
     cursor = conn.cursor()
 
     cursor.execute('SELECT * FROM complaints')
     all_complaints = cursor.fetchall()
 
+    total_issues = len(all_complaints)
+
+    pending_issues = sum(
+        1 for complaint in all_complaints
+        if complaint[4] == "Pending"
+    )
+
+    resolved_issues = sum(
+        1 for complaint in all_complaints
+        if complaint[4] == "Resolved"
+    )
+
     conn.close()
 
     return render_template(
         'complaints.html',
-        complaints=all_complaints
+        complaints=all_complaints,
+        total_issues=total_issues,
+        pending_issues=pending_issues,
+        resolved_issues=resolved_issues
     )
 
 

@@ -18,6 +18,24 @@
     <div class="container">
 
         <h1>Submitted Complaints</h1>
+        <div class="stats-container">
+
+    <div class="stat-card">
+        <h3>Total Issues</h3>
+        <p>{{ total_issues }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Pending</h3>
+        <p>{{ pending_issues }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Resolved</h3>
+        <p>{{ resolved_issues }}</p>
+    </div>
+
+</div>
 
         {% for complaint in complaints %}
 

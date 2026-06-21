@@ -39,7 +39,7 @@
 
         {% for complaint in complaints %}
 
-        <div class="card">
+       <div class="card">
 
     <div class="top-row">
 
@@ -56,6 +56,14 @@
     <h2>{{ complaint[1] }}</h2>
 
     <p>{{ complaint[2] }}</p>
+
+    <a href="/resolve/{{ complaint[0] }}">
+        <button>Mark as Resolved</button>
+    </a>
+
+    <a href="/delete/{{ complaint[0] }}">
+        <button>Delete</button>
+    </a>
 
 </div>
 

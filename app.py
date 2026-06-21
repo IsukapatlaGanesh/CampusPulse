@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import sqlite3
 
 app = Flask(__name__)
@@ -88,7 +88,39 @@ def submit():
     <p><strong>Title:</strong> {title}</p>
     <p><strong>Description:</strong> {description}</p>
     """
+@app.route('/resolve/<int:id>')
+def resolve(id):
 
+    conn = sqlite3.connect('database.db')
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "UPDATE complaints SET status='Resolved' WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/complaints')
+
+@app.route('/delete/<int:id>')
+def delete(id):
+
+    conn = sqlite3.connect('database.db')
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM complaints WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/complaints')
 
 if __name__ == '__main__':
     init_db()
